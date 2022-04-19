@@ -1,5 +1,7 @@
+#include <iostream>
 #include <cmath>
 #include <random>
+#include <vector>
 enum _type {
 	input,
 	normal,
@@ -8,17 +10,17 @@ enum _type {
 class Neuron {
 public:
 	Neuron(){}
-	double value, * weights;
+	double value;
+	std::vector<double> weights;
 	int CountWeights;
 	_type type;
 	Neuron(int a, _type type = normal) : CountWeights(a), type(type)
 	{
-		weights = new double[CountWeights];
-		for (int c = 0; c < CountWeights; c++) *(weights + c) = (double)int(rand() % 101) / 100;
+		for (int c = 0; c < CountWeights; c++) weights.push_back((double)int(rand() % 101) / 100);
 	}
-	Neuron& updateValue(double* inputs) {
+	Neuron& updateValue(std::vector<double> inputs) {
 		double sum = 0;
-		for (int c = 0; c < CountWeights; c++) sum += (*(weights + 1)) * (*(inputs + 1));
+		for (int c = 0; c < CountWeights; c++) sum += weights[c] * inputs[c];
 		value = ActivationFunction(sum);
 		return *this;
 	}
