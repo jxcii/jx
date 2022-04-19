@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Nueron.h"
+#include "layers.h"
 using namespace std;
 int main() {
 	
