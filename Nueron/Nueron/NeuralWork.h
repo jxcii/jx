@@ -17,9 +17,12 @@ public:
 	}
 	vector<double> FeedForward(vector<double> localinputs) {
 		for (int c = 0; c < layers[0].neurons.size(); c++) layers[0].neurons[c]->FeedForward({ localinputs[c] });
-
 		for (int c = 1; c < layers.size(); c++) {
 			localinputs = layers[c - 1].FeedForward();
+			for (int j = 0; j < layers[c].neurons.size(); j++) layers[c].neurons[j]->FeedForward(localinputs);
 		}
+		vector<double> result;
+		for (int c = 0; c < layers[layers.size() - 1].neurons.size(); c++) result.push_back(layers[layers.size() - 1].neurons[c]->output);
+		return result;
 	}
 };
